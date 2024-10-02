@@ -1,0 +1,37 @@
+#code-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 700px;
+  padding: 30px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.otpmultibox {
+  display: flex;
+}
+
+.verification-paragraph {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.otp-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.code {
+  height: 42px;
+  width: 42px;
+  border: 1px solid black;
+  margin: 5px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}

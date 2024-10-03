@@ -38,30 +38,37 @@ codes.forEach((code, idx) => {
         otp[i] = char;
       }
     });
-
     if (pastedData.length === codes.length) {
       codes[codes.length - 1].focus();
     }
   });
 
-  code.addEventListener("keydown", (e) => {
-    if (e.key >= 0 && e.key <= 9) {
-      e.preventDefault(); // Prevent default behavior
-      code.value = e.key; // Set the value to the pressed key
+  // Use 'input' event instead of 'keydown' to capture any input change
+  code.addEventListener("input", (e) => {
+    const inputValue = code.value;
 
-      // Move to the next input if it exists
-      if (idx < codes.length - 1) {
-        setTimeout(() => codes[idx + 1].focus(), 10);
-      }
-    } else if (e.key === "Backspace") {
-      e.preventDefault(); // Prevent default behavior
+    // Only allow single digit input
+    if (inputValue.length > 1) {
+      code.value = inputValue.slice(0, 1);
+    }
+
+    otp[idx] = code.value;
+
+    // Move to the next input if the current input is filled
+    if (inputValue && idx < codes.length - 1) {
+      codes[idx + 1].focus();
+    }
+  });
+
+  code.addEventListener("keydown", (e) => {
+    if (e.key === "Backspace") {
       code.value = ""; // Clear current input
 
       // Move to the previous input if it exists
       if (idx > 0) {
         setTimeout(() => codes[idx - 1].focus(), 10);
       }
+      otp[idx] = "";
     }
-    otp[idx] = code.value;
   });
 });
